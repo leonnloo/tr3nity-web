@@ -67,3 +67,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .flex-start {
+    @apply flex justify-start items-center;
+  }
+  
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-col-center {
+    @apply flex flex-col justify-center items-center;
+  }
+
+  .pm {
+    @apply mx-24
+  }
+}
