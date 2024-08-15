@@ -12,7 +12,7 @@ function MedicalTimeline() {
         <VerticalTimelineElement
           visible={true}
           className="vertical-timeline-element--milestone"
-          date="Month 1-3"
+          date="August 24- September 24"
           iconStyle={{
             background: "#00b800",
             color: "#fff",
@@ -29,9 +29,9 @@ function MedicalTimeline() {
         <VerticalTimelineElement
           visible={true}
           className="vertical-timeline-element--milestone"
-          date="Month 4-6"
+          date="October 24 - December 24"
           iconStyle={{
-            background: "#3e497a",
+            background: "#00b800",
             color: "#fff",
             width: "20px",
             height: "20px",
@@ -47,7 +47,7 @@ function MedicalTimeline() {
         <VerticalTimelineElement
           visible={true}
           className="vertical-timeline-element--milestone"
-          date="Month 7-12"
+          date="January 25 - March 25"
           iconStyle={{
             background: "#3e497a",
             color: "#fff",
@@ -58,58 +58,6 @@ function MedicalTimeline() {
         >
           <h3 className="vertical-timeline-element-title">
             Optimize dosages and continue detailed testing in both models.
-          </h3>
-        </VerticalTimelineElement>
-
-        <VerticalTimelineElement
-          visible={true}
-          className="vertical-timeline-element--milestone"
-          date="Month 13-18"
-          iconStyle={{
-            background: "#3e497a",
-            color: "#fff",
-            width: "20px",
-            height: "20px",
-            left: "calc(60% - 37.5px)",
-          }}
-        >
-          <h3 className="vertical-timeline-element-title">
-            Conduct advanced tests and study the drugs effects on aging.
-          </h3>
-        </VerticalTimelineElement>
-
-        <VerticalTimelineElement
-          visible={true}
-          className="vertical-timeline-element--milestone"
-          date="Month 19-21"
-          iconStyle={{
-            background: "#3e497a",
-            color: "#fff",
-            width: "20px",
-            height: "20px",
-            left: "calc(60% - 37.5px)",
-          }}
-        >
-          <h3 className="vertical-timeline-element-title">
-            Finalize testing, compile data, and prepare research reports.
-          </h3>
-        </VerticalTimelineElement>
-
-        <VerticalTimelineElement
-          visible={true}
-          className="vertical-timeline-element--milestone"
-          date="Month 22-24"
-          iconStyle={{
-            background: "#3e497a",
-            color: "#fff",
-            width: "20px",
-            height: "20px",
-            left: "calc(60% - 37.5px)",
-          }}
-        >
-          <h3 className="vertical-timeline-element-title">
-            Complete the project by submitting reports, exploring patents, and
-            presenting findings.
           </h3>
         </VerticalTimelineElement>
       </VerticalTimeline>

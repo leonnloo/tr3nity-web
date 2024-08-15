@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { FiDownload, FiEdit } from "react-icons/fi";
 import StatusBadge from "@/components/researcher/proposal-status";
 import MyTimeline from "@/components/researcher/timeline";
+import { Button } from "@/components/ui/button";
 
 const ResearcherProjectDetailsPage = () => {
   const { sampleData } = useSampleData();
@@ -48,7 +49,8 @@ const ResearcherProjectDetailsPage = () => {
             <div className="mb-8">
               <h2 className="text-2xl font-bold">Timeline</h2>
               <p className="mt-4 text-gray-600">{sampleData.timeline}</p>
-              <div className="mt-5">
+              <div className="mt-8">
+                <Button className="rounded-full px-4">Update</Button>
                 <MyTimeline />
               </div>
             </div>
@@ -57,17 +59,43 @@ const ResearcherProjectDetailsPage = () => {
         {/* SIDEBAR */}
         <div className="w-[35rem] mb-10">
           <div className="mb-8 bg-white rounded-xl shadow-lg p-8 py-10">
-            <h3 className="text-xl font-bold">Funds raised</h3>
-            <div className="mt-4">
-              <p>
-                Number of donations:{" "}
-                <span className="font-semibold">{sampleData.donations}</span>
-              </p>
-              <p>
-                Tokens:{" "}
-                <span className="font-semibold">{sampleData.funds}</span>
-              </p>
-            </div>
+            {sampleData.status === "active" ? (
+              <>
+                <h3 className="text-xl font-bold">Funds raised so far</h3>
+                <div className="mt-4">
+                  <p>
+                    Number of donations:{" "}
+                    <span className="font-semibold">
+                      {sampleData.donations}
+                    </span>
+                  </p>
+                  <p>
+                    Tokens:{" "}
+                    <span className="font-semibold">{sampleData.funds}</span>
+                  </p>
+                </div>
+              </>
+            ) : sampleData.status === "rejected" ? (
+              <h3 className="text-xl font-bold text-red-600">
+                No funds available
+              </h3>
+            ) : (
+              <>
+                <h3 className="text-xl font-bold">Funds raised</h3>
+                <div className="mt-4">
+                  <p>
+                    Number of donations:{" "}
+                    <span className="font-semibold">
+                      {sampleData.donations}
+                    </span>
+                  </p>
+                  <p>
+                    Tokens:{" "}
+                    <span className="font-semibold">{sampleData.funds}</span>
+                  </p>
+                </div>
+              </>
+            )}
           </div>
 
           <div className="mb-8 bg-white rounded-xl shadow-lg p-8 flex items-center py-10">
