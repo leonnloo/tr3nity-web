@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { Progress } from "@/components/ui/progress";
-import samepleImage from "@/public/image.png";
+import samepleImage from "@/public/sample-1.png";
 import Link from "next/link";
 
 interface CardProps {
