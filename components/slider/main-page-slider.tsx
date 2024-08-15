@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
     Carousel,
     CarouselContent,
@@ -9,21 +11,22 @@ import {
 import ProposalCard from "@/components/proposal-card";
 
 const MainPageSlider = () => {
+    const proposalIds = [1, 2, 3, 4, 5, 6];
     return (
         <div>
             <Carousel>
                 <CarouselContent className="-ml-2 md:-ml-4">
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4"><ProposalCard /></CarouselItem>
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4"><ProposalCard /></CarouselItem>
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4"><ProposalCard /></CarouselItem>
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4"><ProposalCard /></CarouselItem>
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4"><ProposalCard /></CarouselItem>
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4"><ProposalCard /></CarouselItem>
+                    {proposalIds.map((id) => (
+                        <CarouselItem key={id} className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4">
+                            <Link href={`/grant-details/${id}`} passHref legacyBehavior>
+                                <ProposalCard />
+                            </Link>
+                        </CarouselItem>
+                    ))}
                 </CarouselContent>
                 <CarouselPrevious />
                 <CarouselNext />
             </Carousel>
-
         </div>
     )
 }
