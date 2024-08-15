@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        body: ['var(--font-figtree)'],
+        heading: ['var(--font-nunito-sans)'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -52,7 +56,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        
+
         // Add your custom colors here
         mainBlue: "#84D0FF",
         secondaryYellow: "#FFEDA6",
