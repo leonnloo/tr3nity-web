@@ -1,10 +1,11 @@
 import ProposalCard from "@/components/proposal-card";
+import MainPageSlider from "@/components/slider/main-page-slider";
 import { nunitoSans } from "./fonts";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <div className="bg-mainBlue w-full h-96 mb-5 flex flex-col justify-center items-center ">
+      <div className="bg-mainBlue w-full h-96 mb-10 flex flex-col justify-center items-center ">
         <div className="text-white text-6xl text-center font-black mb-4">
           <h1 className={nunitoSans.className}>Collaborate Innovate Decentralize</h1>
         </div>
@@ -12,12 +13,17 @@ export default function Home() {
           <h1 className={nunitoSans.className}>Malaysia's Science Future</h1>
         </div>
       </div>
-      <div className="pm ">
-        <div className="h-32 bg-blue-200 flex-center">
+      <div className="pm">
+        {/* <div className="h-32 bg-blue-200 flex-center">
           Use pm in tailwind for page x margin
+        </div> */}
+        <div className="text-2xl font-bold mb-5">Grants</div>
+        <div className="mb-5">
+          <MainPageSlider />
         </div>
-        <ProposalCard />
-        <ProposalCard showDetails={true} />
+        <div className="text-2xl font-bold mb-5">Projects</div>
+        <MainPageSlider />
+        {/* <ProposalCard showDetails={true} /> */}
       </div>
     </main>
   );

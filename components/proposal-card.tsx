@@ -11,13 +11,13 @@ interface CardProps {
 const ProposalCard: React.FC<CardProps> = ({ showDetails = false }) => {
   return (
     <Link href={""}>
-      <Card className="w-full max-w-md m-5">
+      <Card className="w-full max-w-md m-5 border rounded-xl">
         <Image
           src={samepleImage}
           width={300}
           height={200}
           alt="Research"
-          className="h-48 w-full object-cover"
+          className="h-48 w-full object-cover rounded-t-xl"
         />
         <CardHeader>
           <CardTitle>Early Detection of Gestational Diabetes</CardTitle>
