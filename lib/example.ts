@@ -31,7 +31,7 @@ export const sampleData: sampleDataType[] = [
     timeline:
       "Phase 1: Data Collection and AI Analysis (Months 1-6), Phase 2: Drug Design and In Silico Validation (Months 7-12), Phase 3: In Vitro Validation (Months 13-18)",
     funds: 500000,
-    donations: 250000,
+    donations: 2500,
     withdrawel: 50000,
     links: ["https://linktoabstract.com", "https://linktoprojectdetails.com"],
     members: [
@@ -49,8 +49,8 @@ export const sampleData: sampleDataType[] = [
     duration: "1 month ago",
     timeline:
       "Phase 1: Ethical and Technical Review (Months 1-6), Phase 2: Initial Trials and Adjustments (Months 7-12)",
-    funds: 300000,
-    donations: 150000,
+    funds: 20000,
+    donations: 150,
     withdrawel: 0,
     links: [
       "https://linktogeeneditreview.com",
@@ -72,7 +72,7 @@ export const sampleData: sampleDataType[] = [
       "Phase 1: Research and Development (Months 1-9), Phase 2: Clinical Trials (Months 10-18)",
     duration: "5 months ongoing",
     funds: 750000,
-    donations: 500000,
+    donations: 5000,
     withdrawel: 200000,
     links: ["https://linktoneuralresearch.com", "https://linktoresults.com"],
     members: [

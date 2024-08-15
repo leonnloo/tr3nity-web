@@ -14,13 +14,7 @@ const ResearcherMainPage = () => {
       </div>
       <div className="flex flex-col justify-start items-start mb-10">
         {sampleData.slice(0, 5).map((proposal, index) => (
-          <ResearcherProposalCard
-            key={index}
-            status={proposal.status}
-            imageUrl={proposal.image}
-            title={proposal.title}
-            duration={proposal.duration}
-          />
+          <ResearcherProposalCard key={index} data={proposal} />
         ))}
       </div>
     </div>
