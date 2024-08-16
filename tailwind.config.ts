@@ -60,6 +60,7 @@ const config = {
         // Add your custom colors here
         mainBlue: "#84D0FF",
         secondaryYellow: "#FFEDA6",
+        textGrey: "#9D9D9D",
       },
       borderRadius: {
         lg: "var(--radius)",
