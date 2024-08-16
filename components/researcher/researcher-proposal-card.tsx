@@ -3,17 +3,17 @@ import React from "react";
 import Image from "next/image";
 import StatusBadge from "./proposal-status";
 import { useRouter } from "next/navigation";
-import { useSampleData } from "@/context/researcher-proposal-context";
+import { useResearcherSampleData } from "@/context/researcher-proposal-context";
 import { sampleDataType } from "@/lib/example";
 
 const ResearcherProposalCard = ({ data }: { data: sampleDataType }) => {
   const router = useRouter();
-  const { setSampleData } = useSampleData();
+  const { setResearcherSampleData } = useResearcherSampleData();
   return (
     <a
       className="hover:cursor-pointer  mt-5"
       onClick={() => {
-        setSampleData(data);
+        setResearcherSampleData(data);
         router.push("/researcher/project-details");
       }}
     >

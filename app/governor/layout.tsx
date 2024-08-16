@@ -1,11 +1,11 @@
-import { ResearcherProvider } from "@/context/researcher-proposal-context";
+import { GovernorProvider } from "@/context/governor-proposal-context";
 import React from "react";
 
 const OrderAdminLayout = ({ children }: React.PropsWithChildren<object>) => {
   return (
-    <ResearcherProvider>
+    <GovernorProvider>
       <main>{children}</main>
-    </ResearcherProvider>
+    </GovernorProvider>
   );
 };
 
