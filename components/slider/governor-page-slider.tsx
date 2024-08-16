@@ -27,7 +27,13 @@ const GovernorPageSlider = () => {
               router.push("/governor/proposal");
             }}
           >
-            <ProposalCard />
+            <ProposalCard
+              showDetails={true}
+              showProgress={true}
+              tokensRaised={10000}
+              totalTokens={50000}
+              endDate="02 JUL 2023"
+            />
           </CarouselItem>
           <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4">
             <ProposalCard />

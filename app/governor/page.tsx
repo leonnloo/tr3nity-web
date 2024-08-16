@@ -7,13 +7,15 @@ import React from "react";
 const GovernorsMainPage = () => {
   return (
     <div className="pm flex flex-col mt-10">
-      <div className="grid grid-cols-3 grid-row-2 gap-6 space-x-10">
+      <div className="grid grid-cols-3 gap-6 space-x-10 h-full">
         <div className="col-span-2 row-span-2">
           <Rewards />
         </div>
-        <div className="col-span-1 row-span-2 space-y-5">
-          <ReputationScore />
-          <div className="mt-3">
+        <div className="col-span-1 row-span-2 flex flex-col space-y-5 h-full">
+          <div className="flex-grow">
+            <ReputationScore />
+          </div>
+          <div className="flex-grow">
             <VotedProposals />
           </div>
         </div>
