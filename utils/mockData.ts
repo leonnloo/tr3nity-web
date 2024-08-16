@@ -1,5 +1,5 @@
 // utils/mockData.ts
-
+import { Fund, CartItem } from '../types/interfaces';
 interface Project {
     id: number;
     title: string;
@@ -58,3 +58,64 @@ interface Project {
     const grants = await fetchGrants();
     return grants.flatMap(grant => grant.projects);
   }
+
+
+
+  export const mockFunds: Fund[] = [
+    {
+      id: "fund1",
+      name: "Mestecc RnD Fund",
+      category: "Synthetic Biology",
+      projects: [
+        {
+          id: "project1",
+          title: "Early Detection of Gestational Diabetes",
+          description: "Early detection of gestational diabetes mellitus (GDM) is critical for managing risks to both the mother and the baby. GDM can lead to complications such as preeclampsia, increased risk of...",
+          imageUrl: "/images/gestational-diabetes.jpg"
+        },
+        {
+          id: "project2",
+          title: "Bioengineered Insulin Production",
+          description: "Developing more efficient methods for producing insulin using synthetic biology approaches to address the growing global demand for diabetes treatment.",
+          imageUrl: "/images/insulin-production.jpg"
+        }
+      ]
+    },
+    {
+      id: "fund2",
+      name: "Green Energy Initiative",
+      category: "Renewable Energy",
+      projects: [
+        {
+          id: "project3",
+          title: "Advanced Solar Cell Technology",
+          description: "Research into new materials and designs for solar cells to significantly improve efficiency and reduce production costs.",
+          imageUrl: "/images/solar-cells.jpg"
+        },
+        {
+          id: "project4",
+          title: "Algae-based Biofuel Production",
+          description: "Developing scalable methods for producing biofuels from algae to create a sustainable alternative to fossil fuels.",
+          imageUrl: "/images/algae-biofuel.jpg"
+        }
+      ]
+    }
+  ];
+  
+  export const mockCartItems: CartItem[] = [
+    {
+      fundId: "fund1",
+      projectId: "project1",
+      amount: 50
+    },
+    {
+      fundId: "fund1",
+      projectId: "project2",
+      amount: 30
+    },
+    {
+      fundId: "fund2",
+      projectId: "project3",
+      amount: 40
+    }
+  ];
