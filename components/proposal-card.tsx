@@ -25,12 +25,13 @@ const ProposalCard: React.FC<CardProps> = ({
   return (
     <Link href={""}>
       <Card className="w-full max-w-md m-5 hover:scale-105 transition-transform transform">
+
         <Image
           src={"/sample-1.png"} // Ensure this path is correct for your image
           width={300}
           height={200}
           alt="Research"
-          className="h-48 w-full object-cover"
+          className="h-48 w-full object-cover rounded-t-xl"
         />
         <CardHeader>
           <CardTitle>Early Detection of Gestational Diabetes</CardTitle>

@@ -6,6 +6,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+
 import ProposalCard from "@/components/proposal-card";
 
 const MainPageSlider = () => {
@@ -40,3 +41,4 @@ const MainPageSlider = () => {
 };
 
 export default MainPageSlider;
+

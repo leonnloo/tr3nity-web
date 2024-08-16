@@ -40,7 +40,7 @@ const Navbar = () => {
             </a>
           </div>
           <div className="flex-shrink-0">
-            <button className="bg-yellow-200 text-black px-4 py-2 rounded-md hover:bg-yellow-300">
+            <button className="bg-secondaryYellow text-black px-4 py-2 rounded-md hover:bg-yellow-300">
               Connect wallet
             </button>
           </div>
