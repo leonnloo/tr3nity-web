@@ -1,8 +1,14 @@
 import ProposalCard from "@/components/proposal-card";
 import MainPageSlider from "@/components/slider/main-page-slider";
 import { nunitoSans } from "./fonts";
+import { fetchGrants,fetchProjects } from "@/utils/mockData";
 
-export default function Home() {
+
+export default async function Home() {
+  const [projects, grants] = await Promise.all([fetchProjects(), fetchGrants()]);
+  console.log("Home page rendered with projects:", projects, "and grants:", grants)
+
+
   return (
     <main className="min-h-screen">
       <div className="bg-mainBlue w-full h-96 mb-10 flex flex-col justify-center items-center ">
@@ -19,10 +25,10 @@ export default function Home() {
         </div> */}
         <div className="text-2xl font-bold mb-5">Grants</div>
         <div className="mb-5">
-          <MainPageSlider />
+          <MainPageSlider items={grants} type="grant" />
         </div>
         <div className="text-2xl font-bold mb-5">Projects</div>
-        <MainPageSlider />
+        <MainPageSlider items={projects} type="project" />
         {/* <ProposalCard showDetails={true} /> */}
       </div>
     </main>
