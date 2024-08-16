@@ -3,28 +3,28 @@ import { sampleDataType } from "@/lib/example";
 import React, { createContext, useContext, useState } from "react";
 
 interface SampleDataContextType {
-  sampleData: sampleDataType | null;
-  setSampleData: (sampleData: sampleDataType | null) => void;
+  researcherSampleData: sampleDataType | null;
+  setResearcherSampleData: (researcherSampleData: sampleDataType | null) => void;
 }
 
-const SampleDataContext = createContext<SampleDataContextType | undefined>(
+const ResearcherContext = createContext<SampleDataContextType | undefined>(
   undefined
 );
 
-export const SampleDataProvider: React.FC<{
+export const ResearcherProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [sampleData, setSampleData] = useState<sampleDataType | null>(null);
+  const [researcherSampleData, setResearcherSampleData] = useState<sampleDataType | null>(null);
 
   return (
-    <SampleDataContext.Provider value={{ sampleData, setSampleData }}>
+    <ResearcherContext.Provider value={{ researcherSampleData, setResearcherSampleData }}>
       {children}
-    </SampleDataContext.Provider>
+    </ResearcherContext.Provider>
   );
 };
 
-export const useSampleData = () => {
-  const context = useContext(SampleDataContext);
+export const useResearcherSampleData = () => {
+  const context = useContext(ResearcherContext);
   if (!context) {
     throw new Error("useSampleData must be used within a SampleDataProvider");
   }
