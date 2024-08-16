@@ -44,3 +44,4 @@ const MainPageSlider: React.FC<MainPageSliderProps> = ({ items, type }) => {
 }
 
 export default MainPageSlider;
+
