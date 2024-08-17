@@ -1,60 +1,98 @@
 // utils/mockData.ts
+import axios from 'axios';
 
-interface Project {
-    id: number;
-    title: string;
-    description: string;
-    grantId: number;
-  }
-  
-  interface Grant {
-    id: number;
-    title: string;
-    description: string;
-    projects: Project[];
-  }
-  
-  export async function fetchGrants(): Promise<Grant[]> {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-  
+export interface Project {
+  id: number;
+  project_name: string;
+  description: string;
+  start_time: string; // Adjust type if it's not a string
+  end_time: string; // Adjust type if it's not a string
+  current_fund: number;
+  total_contributors: number;
+  remaining_days: number;
+  created_by: string; // Adjust type if needed, e.g., number for user ID
+  created_at: string; // Adjust type if it's not a string
+  updated_at: string; // Adjust type if it's not a string
+}
+
+export interface Grant {
+  id: number;
+  organisation: string;
+  program_name: string;
+  description: string;
+  start_fund: string;
+  end_fund: string;
+  matching_pool: number;
+  remaining_days: number;
+}
+
+export async function fetchGrants(): Promise<Grant[]> {
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  // API URL
+  const url = `${process.env.NEXT_PUBLIC_DJANGO_URL}tr3nity_grants/get_all_grants`;
+  console.log('Fetching data from:' + url);
+
+  try {
+    const response = await axios.get(url);
+    const data = response.data.data; // Adjust this based on your API response structure
+
     const grants: Grant[] = [
       {
-        id: 1,
-        title: "AI Research Grant",
-        description: "Supporting innovative AI projects to advance the field of artificial intelligence.",
-        projects: [
-          { id: 1, title: "Machine Learning Algorithms", description: "Developing advanced ML algorithms for complex data analysis.", grantId: 1 },
-          { id: 2, title: "Natural Language Processing", description: "Improving NLP techniques for better human-computer interaction.", grantId: 1 },
-          { id: 3, title: "Computer Vision", description: "Enhancing image recognition systems for autonomous vehicles.", grantId: 1 },
-        ]
+        id: data.id,
+        organisation: data.organisation,
+        program_name: data.program_name,
+        description: data.description,
+        start_fund: data.start_fund,
+        end_fund: data.end_fund,
+        matching_pool: data.matching_pool,
+        remaining_days: data.remaining_days
       },
-      {
-        id: 2,
-        title: "Blockchain Innovation Grant",
-        description: "Advancing blockchain technology for secure and transparent transactions.",
-        projects: [
-          { id: 4, title: "Smart Contracts", description: "Creating efficient smart contract systems for automated agreements.", grantId: 2 },
-          { id: 5, title: "Decentralized Finance", description: "Exploring DeFi applications to revolutionize financial services.", grantId: 2 },
-          { id: 6, title: "Blockchain Scalability", description: "Improving blockchain transaction speeds for wider adoption.", grantId: 2 },
-        ]
-      },
-      {
-        id: 3,
-        title: "Green Energy Grant",
-        description: "Supporting sustainable energy research to combat climate change.",
-        projects: [
-          { id: 7, title: "Solar Panel Efficiency", description: "Enhancing solar energy capture for improved sustainability.", grantId: 3 },
-          { id: 8, title: "Wind Turbine Design", description: "Optimizing wind energy systems for higher energy output.", grantId: 3 },
-          { id: 9, title: "Energy Storage Solutions", description: "Developing advanced battery technologies for renewable energy storage.", grantId: 3 },
-        ]
-      }
     ];
-  
-    return grants;
+    return grants; // Return the grant data directly
+  } catch (error) {
+    console.error('Error fetching grants:', error);
+    throw new Error('Could not fetch grants');
   }
-  
-  export async function fetchProjects(): Promise<Project[]> {
-    const grants = await fetchGrants();
-    return grants.flatMap(grant => grant.projects);
+}
+
+export async function fetchProjects(): Promise<Project[]> {
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  // API URL
+  const url = `${process.env.NEXT_PUBLIC_DJANGO_URL}tr3nity_grants/get_all_projects`;
+  console.log('Fetching data from:' + url);
+
+  try {
+    const response = await axios.get(url);
+    const data = response.data.data; // Adjust this based on your API response structure
+
+    // Ensure data is an array
+    if (!Array.isArray(data)) {
+      throw new Error('API response data is not an array');
+    }
+    
+    // Transform the data into the Project interface format
+    const projects: Project[] = data.map((item: any) => ({
+      id: item.id,
+      project_name: item.project_name,
+      description: item.project_description,
+      start_time: item.start_time,
+      end_time: item.end_time,
+      current_fund: parseFloat(item.current_fund), // Convert string to number if needed
+      total_contributors: item.total_contributors,
+      team_members: JSON.parse(item.team_members.replace(/'/g, '"')), // Convert JSON string to array
+      remaining_days: item.remaining_days,
+      created_by: item.created_by,
+      created_at: item.created_at,
+      updated_at: item.updated_at,
+    }));
+
+    return projects;
+  } catch (error) {
+    console.error('Error fetching projects:', error);
+    throw new Error('Could not fetch projects');
   }
+}
