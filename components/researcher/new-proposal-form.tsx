@@ -20,9 +20,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { fetchGrants, Grant, insertNewProposal } from "@/utils/mockData";
+import { toast } from "../ui/use-toast";
 
 const NewProposalForm = () => {
-  const [grants, setGrants] = useState<{ id: string; name: string }[]>([]);
+  const [grants, setGrants] = useState<Grant[]>([]);
   const [selectedGrant, setSelectedGrant] = useState("");
   const [title, setTitle] = useState("");
   const [background, setBackground] = useState("");
@@ -34,18 +36,37 @@ const NewProposalForm = () => {
   const [files, setFiles] = useState<FileList | null>(null);
 
   useEffect(() => {
-    async function fetchGrants() {
-    //   const grantsData = await getGrants();
-    //   setGrants(grantsData);
+    async function fetchData() {
+      const grantsData = await fetchGrants();
+      setGrants(grantsData);
     }
 
-    fetchGrants();
+    fetchData();
   }, []);
 
-  const handleSubmit = () => {
-    // Handle form submission
-    alert(`Proposal submitted: ${title}, ${background}, ${aim}, Grant ID: ${selectedGrant}`);
-    console.log(files);
+  const handleSubmit = async () => {
+    const proposal = {
+      grant: selectedGrant,
+      title,
+      background,
+      aim,
+      timeline,
+      start_time: startTime,
+      end_time: endTime,
+      team_members: teamMembers,
+      files,
+    };
+
+    const result = await insertNewProposal(proposal);
+    if (!result.success) {
+      toast({
+        title: "New proposal submission failed",
+      });
+    } else {
+      toast({
+        title: "New proposal submission successful!",
+      });
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +88,8 @@ const NewProposalForm = () => {
           </SelectTrigger>
           <SelectContent>
             {grants.map((grant) => (
-              <SelectItem key={grant.id} value={grant.id}>
-                {grant.name}
+              <SelectItem key={grant.id} value={grant.id.toString()}>
+                {grant.program_name}
               </SelectItem>
             ))}
           </SelectContent>
@@ -184,7 +205,7 @@ const NewProposalForm = () => {
           id="teamMembers"
           value={teamMembers}
           onChange={(e) => setTeamMembers(e.target.value)}
-          placeholder="Enter team members separated by commas"
+          placeholder="Enter team members address separated by commas"
           className="mb-4"
         />
       </div>
@@ -202,7 +223,7 @@ const NewProposalForm = () => {
           className="mb-4"
         />
       </div>
-      
+
       {/* Submit Button */}
       <Button onClick={handleSubmit} className="w-full mt-4">
         Submit Proposal

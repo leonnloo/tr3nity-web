@@ -373,3 +373,51 @@ export async function fetchProjectsUnderGrant(id: number): Promise<Project[]> {
     throw new Error("Could not fetch projects");
   }
 }
+
+interface NewProposal {
+  grant: string;
+  title: string;
+  background: string;
+  aim: string;
+  timeline: string;
+  start_time: Date | undefined;
+  end_time: Date | undefined;
+  team_members: string;
+  files: FileList | null;
+}
+
+export const insertNewProposal = async (proposal: NewProposal) => {
+  try {
+    const formData = new FormData();
+
+    formData.append("grant", proposal.grant);
+    formData.append("title", proposal.title);
+    formData.append("background", proposal.background);
+    formData.append("aim", proposal.aim);
+    formData.append("timeline", proposal.timeline);
+    formData.append("start_time", proposal.start_time?.toISOString() || "");
+    formData.append("end_time", proposal.end_time?.toISOString() || "");
+    formData.append("team_members", proposal.team_members);
+
+    if (proposal.files) {
+      Array.from(proposal.files).forEach((file) => {
+        formData.append("files", file);
+      });
+    }
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_URL}tr3nity_grants/new_proposal`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to submit the proposal");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error submitting proposal:", error);
+    throw error;
+  }
+};
