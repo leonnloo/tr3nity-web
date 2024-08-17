@@ -30,10 +30,10 @@ export default async function Home() {
         </div> */}
         <div className="text-2xl font-bold mb-5">Grants</div>
         <div className="mb-5">
-          <MainPageSlider items={grants} type="grant" />
+          <MainPageSlider grants={grants} type="grant" />
         </div>
         <div className="text-2xl font-bold mb-5">Projects</div>
-        <MainPageSlider items={projects} type="project" />
+        <MainPageSlider projects={projects} type="project" />
         {/* <ProposalCard showDetails={true} /> */}
       </div>
     </main>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import WalletButton from "../button/wallet-button";
+import CartButton from "../button/cart-button";
 
 const Navbar = () => {
   return (
@@ -40,7 +41,8 @@ const Navbar = () => {
               Your Fundings
             </a>
           </div>
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex-center space-x-3">
+            <CartButton />
             <WalletButton />
           </div>
         </div>
