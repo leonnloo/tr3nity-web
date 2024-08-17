@@ -16,7 +16,7 @@ export default async function Home() {
           <h1 className={nunitoSans.className}>Collaborate Innovate Decentralize</h1>
         </div>
         <div className="text-white text-6xl text-center font-black">
-          <h1 className={nunitoSans.className}>Malaysia's Science Future</h1>
+          <h1 className={nunitoSans.className}>Malaysia&apos;s Science Future</h1>
         </div>
       </div>
       <div className="pm">
