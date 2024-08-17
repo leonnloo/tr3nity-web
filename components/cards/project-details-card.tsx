@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Button } from "@/components/ui/button"
-import samepleImage from '@/public/image.png';
+import samepleImage from '@/public/sample-1.png';
 
 interface ProjectDetailsCardProps { 
     fundingReceived: string;
