@@ -128,7 +128,7 @@ export async function fetchGrant(id: number): Promise<Grant> {
     //     remaining_days: data.remaining_days
     //   },
     // ];
-    
+
     return grant; // Return the grant data directly
   } catch (error) {
     console.error("Error fetching grants:", error);
@@ -159,9 +159,9 @@ export async function fetchProjects(): Promise<Project[]> {
       {
         id: 1,
         grant: 1,
-        project_name: "Innovative AI Research",
+        project_name: "Neuroplasticity in Alzheimer's Disease",
         description:
-          "A groundbreaking project focused on developing advanced AI models for natural language understanding.",
+          "A pioneering study exploring neuroplasticity mechanisms to develop novel therapeutic approaches for Alzheimer's disease patients.",
         start_time: "2024-09-01T00:00:00Z",
         end_time: "2025-09-01T00:00:00Z",
         current_fund: 0,
@@ -174,10 +174,10 @@ export async function fetchProjects(): Promise<Project[]> {
       },
       {
         id: 2,
-        project_name: "Sustainable Energy Solutions",
+        project_name: "Nanoparticle Drug Delivery Systems",
         grant: 1,
         description:
-          "This project aims to create affordable and sustainable energy solutions for rural communities by leveraging solar and wind technologies.",
+          "This project aims to develop advanced nanoparticle-based drug delivery systems for targeted cancer therapy, improving efficacy and reducing side effects.",
         start_time: "2024-10-01T00:00:00Z",
         end_time: "2026-10-01T00:00:00Z",
         current_fund: 50000,
@@ -190,10 +190,10 @@ export async function fetchProjects(): Promise<Project[]> {
       },
       {
         id: 3,
-        project_name: "Healthcare Revolution",
+        project_name: "CRISPR Gene Therapy for Rare Diseases",
         grant: 1,
         description:
-          "A project dedicated to revolutionizing healthcare by integrating blockchain technology for secure and transparent medical records management.",
+          "A groundbreaking project focused on developing CRISPR-based gene therapies for rare genetic disorders, aiming to provide curative treatments for previously untreatable conditions.",
         start_time: "2025-01-01T00:00:00Z",
         end_time: "2026-01-01T00:00:00Z",
         current_fund: 75000,
@@ -249,9 +249,9 @@ export async function fetchProject(id: number): Promise<Project> {
     const project: Project = {
       id: 1,
       grant: 1,
-      project_name: "Innovative AI Research",
+      project_name: "Neuroplasticity in Alzheimer's Disease",
       description:
-        "A groundbreaking project focused on developing advanced AI models for natural language understanding.",
+        "A pioneering study exploring neuroplasticity mechanisms to develop novel therapeutic approaches for Alzheimer's disease patients.",
       start_time: "2024-09-01T00:00:00Z",
       end_time: "2025-09-01T00:00:00Z",
       current_fund: 0,
@@ -261,7 +261,7 @@ export async function fetchProject(id: number): Promise<Project> {
       created_by: "0x1234567890abcdef1234567890abcdef12345678",
       created_at: "2024-08-17T06:18:54.049Z",
       updated_at: "2024-08-17T06:18:54.049Z",
-    };
+    } ;
     // const project: Project[] = data.map((item: any) => ({
     //   id: item.id,
     //   project_name: item.project_name,
@@ -307,9 +307,9 @@ export async function fetchProjectsUnderGrant(id: number): Promise<Project[]> {
       {
         id: 1,
         grant: 1,
-        project_name: "Innovative AI Research",
+        project_name: "Neuroplasticity in Alzheimer's Disease",
         description:
-          "A groundbreaking project focused on developing advanced AI models for natural language understanding.",
+          "A pioneering study exploring neuroplasticity mechanisms to develop novel therapeutic approaches for Alzheimer's disease patients.",
         start_time: "2024-09-01T00:00:00Z",
         end_time: "2025-09-01T00:00:00Z",
         current_fund: 0,
@@ -322,10 +322,10 @@ export async function fetchProjectsUnderGrant(id: number): Promise<Project[]> {
       },
       {
         id: 2,
-        project_name: "Sustainable Energy Solutions",
-        grant: 2,
+        project_name: "Nanoparticle Drug Delivery Systems",
+        grant: 1,
         description:
-          "This project aims to create affordable and sustainable energy solutions for rural communities by leveraging solar and wind technologies.",
+          "This project aims to develop advanced nanoparticle-based drug delivery systems for targeted cancer therapy, improving efficacy and reducing side effects.",
         start_time: "2024-10-01T00:00:00Z",
         end_time: "2026-10-01T00:00:00Z",
         current_fund: 50000,
@@ -338,10 +338,10 @@ export async function fetchProjectsUnderGrant(id: number): Promise<Project[]> {
       },
       {
         id: 3,
-        project_name: "Healthcare Revolution",
+        project_name: "CRISPR Gene Therapy for Rare Diseases",
         grant: 1,
         description:
-          "A project dedicated to revolutionizing healthcare by integrating blockchain technology for secure and transparent medical records management.",
+          "A groundbreaking project focused on developing CRISPR-based gene therapies for rare genetic disorders, aiming to provide curative treatments for previously untreatable conditions.",
         start_time: "2025-01-01T00:00:00Z",
         end_time: "2026-01-01T00:00:00Z",
         current_fund: 75000,

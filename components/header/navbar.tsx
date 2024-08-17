@@ -40,6 +40,12 @@ const Navbar = () => {
             >
               Your Fundings
             </a>
+            <a
+              href="/quadratic-funding-summary"
+              className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Quadratic funding summary
+            </a>
           </div>
           <div className="flex-shrink-0 flex-center space-x-3">
             <CartButton />
