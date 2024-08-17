@@ -39,7 +39,7 @@ const ResearcherProjectDetailsPage = () => {
       </div>
       <div className="flex mt-8 justify-between">
         {/* INFO */}
-        <div className="w-[40rem]">
+        <div className="w-1/2">
           <div className="">
             <div className="mb-8">
               <h2 className="text-2xl font-bold">Background</h2>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import WalletButton from "../button/wallet-button";
 
 const Navbar = () => {
   return (
@@ -40,9 +41,7 @@ const Navbar = () => {
             </a>
           </div>
           <div className="flex-shrink-0">
-            <button className="bg-secondaryYellow text-black px-4 py-2 rounded-md hover:bg-yellow-300">
-              Connect wallet
-            </button>
+            <WalletButton />
           </div>
         </div>
       </div>
