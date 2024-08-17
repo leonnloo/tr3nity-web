@@ -5,8 +5,13 @@ import { fetchGrants,fetchProjects } from "@/utils/mockData";
 
 
 export default async function Home() {
-  const [projects, grants] = await Promise.all([fetchProjects(), fetchGrants()]);
+  const [grants, projects] = await Promise.all([fetchGrants(), fetchProjects()]);
   console.log("Home page rendered with projects:", projects, "and grants:", grants)
+
+  // Ensure that grants and projects are arrays
+  if (!Array.isArray(grants) || !Array.isArray(projects)) {
+    throw new Error('Data fetched is not an array');
+  }
 
 
   return (

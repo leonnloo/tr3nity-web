@@ -12,6 +12,7 @@
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "axios": "^1.7.4",
     "card": "^2.5.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
