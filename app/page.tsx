@@ -5,8 +5,13 @@ import { fetchGrants,fetchProjects } from "@/utils/mockData";
 
 
 export default async function Home() {
-  const [projects, grants] = await Promise.all([fetchProjects(), fetchGrants()]);
+  const [grants, projects] = await Promise.all([fetchGrants(), fetchProjects()]);
   console.log("Home page rendered with projects:", projects, "and grants:", grants)
+
+  // Ensure that grants and projects are arrays
+  if (!Array.isArray(grants) || !Array.isArray(projects)) {
+    throw new Error('Data fetched is not an array');
+  }
 
 
   return (
@@ -16,7 +21,7 @@ export default async function Home() {
           <h1 className={nunitoSans.className}>Collaborate Innovate Decentralize</h1>
         </div>
         <div className="text-white text-6xl text-center font-black">
-          <h1 className={nunitoSans.className}>Malaysia's Science Future</h1>
+          <h1 className={nunitoSans.className}>Malaysia&apos;s Science Future</h1>
         </div>
       </div>
       <div className="pm">
@@ -25,10 +30,10 @@ export default async function Home() {
         </div> */}
         <div className="text-2xl font-bold mb-5">Grants</div>
         <div className="mb-5">
-          <MainPageSlider items={grants} type="grant" />
+          <MainPageSlider grants={grants} type="grant" />
         </div>
         <div className="text-2xl font-bold mb-5">Projects</div>
-        <MainPageSlider items={projects} type="project" />
+        <MainPageSlider projects={projects} type="project" />
         {/* <ProposalCard showDetails={true} /> */}
       </div>
     </main>
