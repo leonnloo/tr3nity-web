@@ -2,31 +2,32 @@
 import { sampleDataType } from "@/lib/example";
 import React, { createContext, useContext, useState } from "react";
 
-interface SampleDataContextType {
-  governnorSampleData: sampleDataType | null;
-  setGovernorSampleData: (governnorSampleData: sampleDataType | null) => void;
+interface GProposalContextType {
+  governorProposal: sampleDataType | null;
+  setGovernorProposal: (governorProposal: sampleDataType | null) => void;
 }
 
-const GovernorContext = createContext<SampleDataContextType | undefined>(
+const GovernorContext = createContext<GProposalContextType | undefined>(
   undefined
 );
 
 export const GovernorProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [governnorSampleData, setGovernorSampleData] = useState<sampleDataType | null>(null);
+  const [governorProposal, setGovernorProposal] =
+    useState<sampleDataType | null>(null);
 
   return (
-    <GovernorContext.Provider value={{ governnorSampleData, setGovernorSampleData }}>
+    <GovernorContext.Provider value={{ governorProposal, setGovernorProposal }}>
       {children}
     </GovernorContext.Provider>
   );
 };
 
-export const useGovernorSampleData = () => {
+export const useGovernorProposal = () => {
   const context = useContext(GovernorContext);
   if (!context) {
-    throw new Error("useSampleData must be used within a SampleDataProvider");
+    throw new Error("GuseProposal must be used within a GProposalProvider");
   }
   return context;
 };

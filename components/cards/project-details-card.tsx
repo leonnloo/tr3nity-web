@@ -5,6 +5,7 @@ import samepleImage from "@/public/sample-1.png";
 import { useCart } from "@/context/cart-context"; // Import the CartContext
 import { useRouter } from "next/navigation";
 import { Project } from "@/utils/mockData";
+import { toast } from "../ui/use-toast";
 
 interface ProjectDetailsCardProps {
   project: Project;
@@ -25,6 +26,11 @@ const ProjectDetailsCard: React.FC<ProjectDetailsCardProps> = ({
   const handleAddToCart = () => {
     // Call addItemToCart and pass the project to it
     addItemToCart({ project });
+    toast({
+      title: "Added to Cart",
+      description: `${project.project_name} has been added to your cart`,
+      
+    });
   };
 
   return (

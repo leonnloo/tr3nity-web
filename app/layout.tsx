@@ -6,9 +6,9 @@ import { GrantProvider } from "@/context/grant-context";
 import { ProjectProvider } from "@/context/project-context";
 import { Toaster } from "@/components/ui/toaster";
 import { CartProvider } from "@/context/cart-context";
+import { Footer } from "@/components/footer/footer";
 export const metadata: Metadata = {
-  title: "T3inity",
-  description: "Your source of funding",
+  title: "TR3DAO",
 };
 
 export default function RootLayout({
@@ -25,6 +25,7 @@ export default function RootLayout({
               <Navbar />
               {children}
               <Toaster />
+              <Footer />
             </ProjectProvider>
           </GrantProvider>
         </CartProvider>

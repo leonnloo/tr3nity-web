@@ -2,7 +2,6 @@
 import ProjectDetailsCard from "@/components/cards/project-details-card";
 import { fetchProject } from "@/utils/mockData";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Footer } from "@/components/footer/footer";
 import { useProject } from "@/context/project-context";
 import { toast } from "@/components/ui/use-toast";
 import { useParams, useRouter } from "next/navigation";
@@ -107,7 +106,6 @@ export default function ProjectDetails() {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </main>
   );
 }

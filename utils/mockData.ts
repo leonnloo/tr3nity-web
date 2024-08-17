@@ -128,6 +128,7 @@ export async function fetchGrant(id: number): Promise<Grant> {
     //     remaining_days: data.remaining_days
     //   },
     // ];
+    
     return grant; // Return the grant data directly
   } catch (error) {
     console.error("Error fetching grants:", error);
@@ -322,7 +323,7 @@ export async function fetchProjectsUnderGrant(id: number): Promise<Project[]> {
       {
         id: 2,
         project_name: "Sustainable Energy Solutions",
-        grant: 1,
+        grant: 2,
         description:
           "This project aims to create affordable and sustainable energy solutions for rural communities by leveraging solar and wind technologies.",
         start_time: "2024-10-01T00:00:00Z",
@@ -367,7 +368,10 @@ export async function fetchProjectsUnderGrant(id: number): Promise<Project[]> {
     //   updated_at: item.updated_at,
     // }));
 
-    return projects;
+    // Filter projects based on the grant ID
+    const filteredProjects = projects.filter((project) => project.grant === id);
+
+    return filteredProjects;
   } catch (error) {
     console.error("Error fetching projects:", error);
     throw new Error("Could not fetch projects");
@@ -405,10 +409,13 @@ export const insertNewProposal = async (proposal: NewProposal) => {
       });
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_URL}tr3nity_grants/new_proposal`, {
-      method: "POST",
-      body: formData,
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_DJANGO_URL}tr3nity_grants/new_proposal`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to submit the proposal");

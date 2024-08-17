@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const ReputationScore = () => {
-  const progress = 79; // This is the progress percentage
+  const progress = 60; // This is the progress percentage
   const radius = 45;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (progress / 100) * circumference;

@@ -2,19 +2,18 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { FiEdit } from "react-icons/fi";
 import MyTimeline from "@/components/researcher/timeline";
-import { useGovernorSampleData } from "@/context/governor-proposal-context";
+import { useGovernorProposal } from "@/context/governor-proposal-context";
 import VotesCard from "@/components/governor/votes-card";
 import DaysLeft from "@/components/days-left";
 import LinksComponent from "@/components/links-card";
 import MembersComponent from "@/components/members-card";
 
 const ResearcherProjectDetailsPage = () => {
-  const { governnorSampleData } = useGovernorSampleData();
+  const { governorProposal } = useGovernorProposal();
   const router = useRouter();
 
-  if (!governnorSampleData) {
+  if (!governorProposal) {
     router.push("/governor");
     return null;
   }
@@ -23,17 +22,17 @@ const ResearcherProjectDetailsPage = () => {
     <div className="pm">
       <div className="mt-20 flex justify-between">
         <div className=" w-2/3 max-w-xl">
-          {/* <StatusBadge status={governnorSampleData.status} /> */}
-          <DaysLeft />
+          {/* <StatusBadge status={governorProposal.status} /> */}
+          <DaysLeft remainingDays={governorProposal.remaingDays!} />
           <h1 className="text-5xl font-extrabold mt-5">
-            {governnorSampleData.title}
+            {governorProposal.title}
           </h1>
         </div>
         <Image
           className="w-[35rem] h-[20rem] object-cover rounded-3xl"
           width={560}
           height={320}
-          src={governnorSampleData.image}
+          src={governorProposal.image}
           alt="Project Illustration"
         />
       </div>
@@ -44,19 +43,17 @@ const ResearcherProjectDetailsPage = () => {
             <div className="mb-8">
               <h2 className="text-2xl font-bold">Background</h2>
               <p className="mt-4 text-gray-600">
-                {governnorSampleData.background}
+                {governorProposal.background}
               </p>
             </div>
             <div className="mb-8">
               <h2 className="text-2xl font-bold">Aim</h2>
-              <p className="mt-4 text-gray-600">{governnorSampleData.aim}</p>
+              <p className="mt-4 text-gray-600">{governorProposal.aim}</p>
             </div>
 
             <div className="mb-8">
               <h2 className="text-2xl font-bold">Timeline</h2>
-              <p className="mt-4 text-gray-600">
-                {governnorSampleData.timeline}
-              </p>
+              <p className="mt-4 text-gray-600">{governorProposal.timeline}</p>
               <div className="mt-8">
                 {/* <Button className="rounded-full px-4">Update</Button> */}
                 <MyTimeline />
@@ -68,8 +65,8 @@ const ResearcherProjectDetailsPage = () => {
         <div className="w-[35rem] mb-10 space-y-8">
           <VotesCard />
 
-          <LinksComponent links={governnorSampleData.links} />
-          <MembersComponent members={governnorSampleData.members} />
+          <LinksComponent links={governorProposal.links} />
+          <MembersComponent members={governorProposal.members} />
         </div>
       </div>
     </div>

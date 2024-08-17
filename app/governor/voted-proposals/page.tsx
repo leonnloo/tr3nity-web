@@ -6,8 +6,8 @@ const GovernorsMainPage = () => {
     <div className="pm flex flex-col my-16">
       <h1 className="font-extrabold text-4xl ">Voted Proposals</h1>
       <div className="mt-5">
-        <GovernorPageSlider />
-        <GovernorPageSlider />
+        <GovernorPageSlider showDetails={true} />
+        <GovernorPageSlider showDetails={true} />
       </div>
     </div>
   );

@@ -15,6 +15,9 @@ export type sampleDataType = {
   donations: number;
   withdrawel: number;
   links: string[];
+  startDate?: string;
+  endDate?: string;
+  remaingDays?: number;
   members: { color: string; address: string }[];
 };
 
@@ -38,6 +41,9 @@ export const sampleData: sampleDataType[] = [
       { color: "blue", address: "0x1234...abcd" },
       { color: "green", address: "0x5678...efgh" },
     ],
+    startDate: "02 JUL 2024",
+    endDate: "09 SEP 2024",
+    remaingDays: 70,
   },
   {
     title: "Exploration of Gene Editing for Rare Diseases",
@@ -60,6 +66,9 @@ export const sampleData: sampleDataType[] = [
       { color: "yellow", address: "0x4321...dcba" },
       { color: "orange", address: "0x8765...4321" },
     ],
+    startDate: "25 JUL 2024",
+    endDate: "09 SEP 2024",
+    remaingDays: 90,
   },
   {
     title: "Advanced Research in Neural Regeneration Techniques",
@@ -79,5 +88,8 @@ export const sampleData: sampleDataType[] = [
       { color: "red", address: "0x9abc...def0" },
       { color: "purple", address: "0x1234...5678" },
     ],
+    startDate: "11 OCT 2024",
+    remaingDays: 120,
+    endDate: "15 DEC 2024",
   },
 ];

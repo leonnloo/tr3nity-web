@@ -9,7 +9,7 @@ import React, {
   useContext,
 } from "react";
 
-interface CartItem {
+export interface CartItem {
   project: Project;
 }
 

@@ -24,8 +24,8 @@ const GovernorsMainPage = () => {
         <h1 className="font-extrabold text-4xl ">Recent Proposals</h1>
       </div>
       <div className="mt-5">
-        <GovernorPageSlider />
-        <GovernorPageSlider />
+        <GovernorPageSlider showDetails={false} />
+        <GovernorPageSlider showDetails={false} />
       </div>
       {/* <div className="flex flex-col justify-start items-start mb-10"> */}
       {/* {sampleData.slice(0, 5).map((proposal, index) => (

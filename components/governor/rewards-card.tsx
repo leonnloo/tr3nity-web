@@ -4,8 +4,8 @@ import { Progress } from "@/components/ui/progress";
 import { FiInfo } from "react-icons/fi"; // Example icon, replace with your preferred icon
 
 const Rewards = () => {
-  const currentReputation = 4.5; // Example reputation
-  const nextTierReputation = 7; // Next reputation tier
+  const currentReputation = 60; // Example reputation
+  const nextTierReputation = 80; // Next reputation tier
   
   const progressValue = (currentReputation / nextTierReputation) * 100;
 
@@ -24,11 +24,11 @@ const Rewards = () => {
           Only the proposals that successfully publish will receive rewards:
         </p>
         <ul className="mt-4 list-disc list-inside text-gray-600">
-          <li>Reputation 1-3 → get 0.05%</li>
+          <li>Reputation 10-30 → get 0.05%</li>
           <li>
-            Reputation 4-7 → get 0.075% <FiInfo className="inline ml-2 text-blue-500" />
+            Reputation 40-70 → get 0.075% <FiInfo className="inline ml-2 text-blue-500" />
           </li>
-          <li>Reputation 8-10 → get 0.1%</li>
+          <li>Reputation 80-100 → get 0.1%</li>
         </ul>
 
         {/* Progress bar for Reputation */}

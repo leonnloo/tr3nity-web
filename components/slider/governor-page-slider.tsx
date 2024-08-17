@@ -9,47 +9,37 @@ import {
 
 import ProposalCard from "@/components/proposal-card";
 import { useRouter } from "next/navigation";
-import { useGovernorSampleData } from "@/context/governor-proposal-context";
-import { sampleData } from "@/lib/example";
+import { useGovernorProposal } from "@/context/governor-proposal-context";
+import { sampleData } from "@/lib/example"; // Assuming sampleData is an array of proposals
 
-const GovernorPageSlider = () => {
+const GovernorPageSlider = ({showDetails}: {showDetails: boolean}) => {
   const router = useRouter();
-  const { setGovernorSampleData } = useGovernorSampleData();
+  const { setGovernorProposal } = useGovernorProposal();
+
   return (
     <div>
       <Carousel>
         <CarouselContent className="-ml-2 md:-ml-4">
-          <CarouselItem
-            className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4"
-            onClick={() => {
-              // TODO: Change dynamic data
-              setGovernorSampleData(sampleData[0]);
-              router.push("/governor/proposal");
-            }}
-          >
-            <ProposalCard
-              showDetails={true}
-              showProgress={true}
-              tokensRaised={10000}
-              totalTokens={50000}
-              endDate="02 JUL 2023"
-            />
-          </CarouselItem>
-          <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4">
-            <ProposalCard />
-          </CarouselItem>
-          <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4">
-            <ProposalCard />
-          </CarouselItem>
-          <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4">
-            <ProposalCard />
-          </CarouselItem>
-          <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4">
-            <ProposalCard />
-          </CarouselItem>
-          <CarouselItem className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4">
-            <ProposalCard />
-          </CarouselItem>
+          {sampleData.map((data, index) => (
+            <CarouselItem
+              key={index} // Ensure each item has a unique key
+              className="md:basis-1/2 lg:basis-1/3 pl-2 md:pl-4"
+              onClick={() => {
+                setGovernorProposal(data);
+                router.push("/governor/proposal");
+              }}
+            >
+              <ProposalCard
+                showDetails={showDetails}
+                showProgress={true}
+                tokensRaised={5000} // Assuming these fields are in your sampleData
+                totalTokens={10000} // Adjust the field names according to your data structure
+                endDate={"02 JUL 2023"} // Assuming this field is in your sampleData
+                title={data.title} // Assuming title is in your sampleData
+                description={data.background} // Assuming description is in your sampleData
+              />
+            </CarouselItem>
+          ))}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

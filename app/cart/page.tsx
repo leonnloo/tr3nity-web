@@ -1,66 +1,110 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import CartGrantContainer from "@/components/cart/CartGrantsContainer";
+import CartSummary from "@/components/cart/CartSummary";
 import { useCart } from "@/context/cart-context";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { fetchGrants, Grant, Project } from "@/utils/mockData";
 
-const CartPage: React.FC = () => {
+const YourFundingsPage: React.FC = () => {
   const { cart, deleteItemFromCart } = useCart();
+  const cartItems = cart.cartItems;
+  const [grants, setGrants] = useState<Grant[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [amounts, setAmounts] = useState<{ [key: string]: number }>({});
 
-  if (!cart || cart.cartItems.length === 0) {
-    return (
-      <div className="container mx-auto text-center mt-10">
-        <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
-        <Link href="/" className="text-blue-500 underline">
-          Continue Shopping
-        </Link>
-      </div>
-    );
-  }
+  useEffect(() => {
+    // Fetch grants data
+    const getData = async () => {
+      const fetchedGrants = await fetchGrants();
+      setGrants(fetchedGrants);
+      setLoading(false);
+    };
+
+    getData();
+  }, []);
+
+  // Function to group projects by grantID
+  const groupProjectsByGrant = () => {
+    const groupedProjects: { [grantID: string]: Project[] } = {};
+
+    cartItems.forEach((item) => {
+      const grantID = item.project.grant.toString();
+
+      if (!groupedProjects[grantID]) {
+        groupedProjects[grantID] = [];
+      }
+
+      groupedProjects[grantID].push(item.project);
+    });
+
+    return groupedProjects;
+  };
+
+  const calculateGrantTotal = (grantID: string) => {
+    return Object.entries(amounts)
+      .filter(([key]) => key.startsWith(`${grantID}-`))
+      .reduce((total, [, amount]) => total + amount, 0);
+  };
+
+  const onAmountChange = (
+    grantID: number,
+    projectId: number,
+    amount: number
+  ) => {
+    const key = `${grantID}-${projectId}`;
+    setAmounts((prevAmounts) => ({
+      ...prevAmounts,
+      [key]: amount,
+    }));
+  };
+
+  const handleUpdateCart = (projectId: number, grantID: number) => {
+    const item = cartItems.find((item) => item.project.id === projectId);
+    if (item) {
+      deleteItemFromCart(projectId);
+      const key = `${grantID}-${projectId}`;
+      setAmounts((prevAmounts) => {
+        const { [key]: _, ...rest } = prevAmounts; // Remove the specific project entry from amounts
+        return rest;
+      });
+    }
+  };
+
+  const groupedProjects = groupProjectsByGrant();
 
   return (
-    <div className="container mx-auto mt-10">
-      <h1 className="text-3xl font-bold mb-8">Your Cart</h1>
-      {cart.cartItems.map((item, index) => (
-        <div
-          key={item.project.id}
-          className="flex items-center justify-between border-b border-gray-300 py-4"
-        >
-          <div className="flex items-center">
-            <div className="w-24 h-24 relative">
-              <Image
-                src="/sample-1.png" // Placeholder image, replace with actual project image if available
-                alt={item.project.project_name}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-md"
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Your Fundings</h1>
+      <div className="flex flex-wrap">
+        <div className="w-full lg:w-2/3 pr-4">
+          {Object.entries(groupedProjects).map(([grantID, projects]) => {
+            const matchingGrant = grants.find(
+              (grant) => grant.id.toString() === grantID
+            );
+            const grantTotal = calculateGrantTotal(grantID);
+            return (
+              <CartGrantContainer
+                key={grantID}
+                grantName={matchingGrant?.program_name || "Unknown Grant"} // Provide a default name if not found
+                projects={projects}
+                grantTotal={grantTotal}
+                onUpdateCart={handleUpdateCart}
+                onAmountChange={onAmountChange}
               />
-            </div>
-            <div className="ml-4">
-              <h2 className="text-xl font-bold">{item.project.project_name}</h2>
-              <p className="text-gray-500">{item.project.description}</p>
-            </div>
-          </div>
-          <Button
-            variant="destructive"
-            onClick={() => deleteItemFromCart(item.project.id)}
-          >
-            Remove
-          </Button>
+            );
+          })}
         </div>
-      ))}
-      <div className="mt-10 text-right">
-        <Link
-          href="/checkout"
-          className="bg-mainBlue text-white py-2 px-4 rounded-md"
-        >
-          Proceed to Checkout
-        </Link>
+        <div className="w-full lg:w-1/3">
+          <CartSummary
+            cartItems={cartItems}
+            amounts={amounts}
+            grants={grants}
+          />
+        </div>
       </div>
     </div>
   );
 };
 
-export default CartPage;
+export default YourFundingsPage;
