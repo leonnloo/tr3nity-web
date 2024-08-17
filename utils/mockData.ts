@@ -372,4 +372,4 @@ export async function fetchProjectsUnderGrant(id: number): Promise<Project[]> {
     console.error("Error fetching projects:", error);
     throw new Error("Could not fetch projects");
   }
-}
+

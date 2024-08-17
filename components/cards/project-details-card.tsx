@@ -6,6 +6,7 @@ import { useCart } from "@/context/cart-context"; // Import the CartContext
 import { useRouter } from "next/navigation";
 import { Project } from "@/utils/mockData";
 
+
 interface ProjectDetailsCardProps {
   project: Project;
   fundingReceived: string;
