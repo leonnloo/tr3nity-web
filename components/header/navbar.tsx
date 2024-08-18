@@ -35,12 +35,6 @@ const Navbar = () => {
               Your Fundings
             </a>
             <a
-              href="/your-fundings"
-              className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Quadratic funding summary
-            </a>
-            <a
               href="/quadratic-funding-summary"
               className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
             >

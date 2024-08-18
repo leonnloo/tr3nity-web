@@ -37,6 +37,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   }, []);
 
   const setCartToState = () => {
+    // localStorage.clear();
     const cartFromStorage = localStorage.getItem("cart");
     setCart(cartFromStorage ? JSON.parse(cartFromStorage) : { cartItems: [] });
   };
