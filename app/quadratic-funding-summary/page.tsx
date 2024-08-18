@@ -50,7 +50,7 @@ const QuadraticFundingSummaryPage = () => {
 
     return (
         <div className="pm flex flex-col mt-10">
-            <h1 className="font-extrabold text-4xl mb-8">Quadratic funding summary</h1>
+            <h1 className="font-extrabold text-4xl mb-8">Quadratic funding summary - 100,000 TR3 Matching Pool</h1>
             <div className="grid grid-cols-3 gap-6 space-x-10 h-full">
                 <QuadraticSummaryCard title="Neuroplasticity in Alzheimer's Disease" description="A pioneering study exploring neuroplasticity mechanisms to develop novel therapeutic approaches for Alzheimer's disease patients." contributedFunds="100" matchedFunds="12500.00" numberOfContributers="2"></QuadraticSummaryCard>
                 <QuadraticSummaryCard title="Nanoparticle Drug Delivery Systems" description="This project aims to develop advanced nanoparticle-based drug delivery systems for targeted cancer therapy, improving efficacy and reducing side effects." contributedFunds="100" matchedFunds="25000.00" numberOfContributers="4"></QuadraticSummaryCard>

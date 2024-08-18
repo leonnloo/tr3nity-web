@@ -7,6 +7,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
+
 interface ProjectDetailsCardProps {
     title: string;
     description: string;
