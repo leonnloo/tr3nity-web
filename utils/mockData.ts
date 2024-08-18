@@ -83,7 +83,9 @@ export async function fetchGrant(id: number): Promise<Grant> {
       matching_pool: data.matching_pool,
       remaining_days: data.remaining_days
     };
+
     
+
     return grant; // Return the grant data directly
   } catch (error) {
     console.error("Error fetching grants:", error);
@@ -129,6 +131,7 @@ export async function fetchProjects(): Promise<Project[]> {
     }));
 
     console.log('Projects:', projects);
+
     return projects;
   } catch (error) {
     console.error("Error fetching projects:", error);
@@ -172,6 +175,7 @@ export async function fetchProject(id: number): Promise<Project> {
       timeline: data.timeline,
       status: data.status,
     };
+
 
     return project;
   } catch (error) {
@@ -219,6 +223,7 @@ export async function fetchProjectsUnderGrant(id: number): Promise<Project[]> {
 
     // console.log('Projects:', projects);
     return projects;
+
   } catch (error) {
     console.error("Error fetching projects:", error);
     throw new Error("Could not fetch projects");
