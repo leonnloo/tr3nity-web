@@ -58,6 +58,7 @@ const MainPageSlider: React.FC<MainPageSliderProps> = ({
                         : (item as Grant).program_name
                     }
                     description={item.description}
+                    endDate={item.end_fund}
                   />
                 </button>
               </CarouselItem>

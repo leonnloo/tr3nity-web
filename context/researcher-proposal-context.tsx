@@ -1,10 +1,10 @@
 "use client";
-import { sampleDataType } from "@/lib/example";
+import { Project } from "@/lib/example";
 import React, { createContext, useContext, useState } from "react";
 
 interface SampleDataContextType {
-  researcherSampleData: sampleDataType | null;
-  setResearcherSampleData: (researcherSampleData: sampleDataType | null) => void;
+  researcherSampleData: Project | null;
+  setResearcherSampleData: (researcherSampleData: Project | null) => void;
 }
 
 const ResearcherContext = createContext<SampleDataContextType | undefined>(
@@ -14,7 +14,7 @@ const ResearcherContext = createContext<SampleDataContextType | undefined>(
 export const ResearcherProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [researcherSampleData, setResearcherSampleData] = useState<sampleDataType | null>(null);
+  const [researcherSampleData, setResearcherSampleData] = useState<Project | null>(null);
 
   return (
     <ResearcherContext.Provider value={{ researcherSampleData, setResearcherSampleData }}>

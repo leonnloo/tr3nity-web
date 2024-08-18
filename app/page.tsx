@@ -1,7 +1,7 @@
 import ProposalCard from "@/components/proposal-card";
 import MainPageSlider from "@/components/slider/main-page-slider";
 import { nunitoSans } from "./fonts";
-import { fetchGrants,fetchProjects } from "@/utils/mockData";
+import { fetchGrants,fetchProjects, fetchProjectsUnderGrant } from "@/utils/mockData";
 
 
 export default async function Home() {

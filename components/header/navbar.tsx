@@ -23,12 +23,6 @@ const Navbar = () => {
               Researchers
             </a>
             <a
-              href="/funders"
-              className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Funders
-            </a>
-            <a
               href="/governor"
               className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
             >
@@ -39,6 +33,12 @@ const Navbar = () => {
               className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
             >
               Your Fundings
+            </a>
+            <a
+              href="/your-fundings"
+              className="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Quadratic funding summary
             </a>
             <a
               href="/quadratic-funding-summary"

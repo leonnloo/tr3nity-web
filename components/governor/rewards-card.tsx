@@ -1,12 +1,86 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import axios from 'axios'; // Import axios for making HTTP requests
 import { FiInfo } from "react-icons/fi"; // Example icon, replace with your preferred icon
+import { govenorWalletAddress } from "@/app/governor/page";
 
 const Rewards = () => {
-  const currentReputation = 60; // Example reputation
+  const [currentReputation, setCurrentReputation] = useState<number | null>(null);
+  const [balance, setBalance] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
   const nextTierReputation = 80; // Next reputation tier
   
+  const fetchReputation = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}tr3nity_project/reputation_score/${govenorWalletAddress}`);
+      if (response.data.status === 'success') {
+        setCurrentReputation(response.data.data); // Set the current reputation
+      } else {
+        setError('Failed to load reputation');
+      }
+    } catch (error) {
+      console.error('Error fetching reputation:', error);
+      setError('Failed to load reputation');
+    }
+  };
+
+  const fetchBalance = async () => {
+    try {
+
+      const data = {
+        wallet_address: govenorWalletAddress
+      };
+
+      console.log('Sending data:', data); // Debugging: log the data being sent
+      
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_DJANGO_URL}tr3nity_token/api_check_balance`, data);
+
+      setBalance(parseFloat(response.data.data.result));
+      
+    } catch (error) {
+      console.error('Error fetching balance:', error);
+      setError('Failed to load balance');
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchReputation();
+      await fetchBalance();
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <Card className="shadow-lg rounded-xl h-full">
+        <CardContent className="flex items-center justify-center py-10">
+          <p className="text-lg text-gray-600">Loading...</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card className="shadow-lg rounded-xl h-full">
+        <CardContent className="flex items-center justify-center py-10">
+          <p className="text-lg text-red-600">{error}</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (currentReputation === null || balance === null) {
+    return null; // or a placeholder if you prefer
+  }
+
   const progressValue = (currentReputation / nextTierReputation) * 100;
 
   return (
@@ -16,7 +90,7 @@ const Rewards = () => {
       </CardHeader>
       <CardContent>
         <div className="flex items-center mb-5">
-          <div className="text-4xl font-bold">30.01 TR3</div>
+          <div className="text-4xl font-bold">{balance.toFixed(2)} TR3</div>
           <div className="ml-3 text-gray-500 text-sm">Token</div>
         </div>
 
@@ -39,11 +113,6 @@ const Rewards = () => {
             Current Reputation: <span className="font-semibold">{currentReputation}</span>
           </p>
         </div>
-
-        {/* Call to Action */}
-        {/* <button className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-full">
-          Learn More
-        </button> */}
       </CardContent>
     </Card>
   );

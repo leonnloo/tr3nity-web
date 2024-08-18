@@ -11,14 +11,25 @@ export default function ProjectDetails() {
   const params = useParams();
   const { project, setProject } = useProject();
   const [loading, setLoading] = useState(true);
+  const [teamMembers, setTeamMembers] = useState<string[]>([]);
   const router = useRouter();
+
   useEffect(() => {
-    // Fetch projects data
+    // Fetch project data
     const getData = async () => {
       try {
         if (!project) {
-          const project = await fetchProject(Number(params.id));
-          setProject(project);
+          const fetchedProject = await fetchProject(Number(params.id));
+          setProject(fetchedProject);
+          // Directly use team_members if it's an array of strings
+          if (fetchedProject.team_members) {
+            setTeamMembers(fetchedProject.team_members);
+          }
+        } else {
+          // Use existing project data if already loaded
+          if (project.team_members) {
+            setTeamMembers(project.team_members);
+          }
         }
         setLoading(false);
       } catch (error) {
@@ -32,11 +43,11 @@ export default function ProjectDetails() {
     };
 
     getData();
-  });
+  }, [project, params.id, router, setProject]);
 
   if (!project) {
     toast({
-      title: "project not found",
+      title: "Project not found",
       description: "Please select a project before proceeding to this page",
     });
     router.push("/");
@@ -52,57 +63,38 @@ export default function ProjectDetails() {
       <div className="pm">
         <ProjectDetailsCard
           project={project}
-          fundingReceived="59,000"
-          contributors="68"
-          endDays="69"
-        ></ProjectDetailsCard>
+          fundingReceived={project.current_fund.toString()}
+          contributors={project.total_contributors.toString()}
+          endDays={project.remaining_days.toString()}
+        />
         <div className="flex flex-col space-y-5">
           <div className="text-2xl font-bold">{project.project_name}</div>
           <div>{project.description}</div>
-          <div className="text-2xl font-bold">Highlights</div>
+          <div className="text-2xl font-bold">Aim</div>
           <div className="space-y-3">
-            <li>This is the highlight of the research</li>
-            <li>This is the highlight of the research</li>
-            <li>This is the highlight of the research</li>
+            <div>{project.aim}</div>
+          </div>
+          <div className="text-2xl font-bold">Timeline</div>
+          <div className="space-y-3">
+            <div>{project.timeline}</div>
           </div>
           <div>
             <div className="text-2xl font-bold">The team</div>
-            <div className="text-md font-semibold">Leony company</div>
           </div>
           <div className="flex flex-row space-x-10 mb-10">
-            <div className="flex flex-col items-center">
-              <Avatar className="w-16 h-16 mb-2">
-                {" "}
-                {/* Added margin bottom */}
-                <AvatarImage
-                  className="w-full h-full"
-                  src="https://github.com/shadcn.png"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <span className="text-sm font-medium">John Doe</span>{" "}
-              {/* Name added */}
-            </div>
-            <div className="flex flex-col items-center">
-              <Avatar className="w-16 h-16 mb-2">
-                <AvatarImage
-                  className="w-full h-full"
-                  src="https://github.com/shadcn.png"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <span className="text-sm font-medium">Jane Smith</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <Avatar className="w-16 h-16 mb-2">
-                <AvatarImage
-                  className="w-full h-full"
-                  src="https://github.com/shadcn.png"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <span className="text-sm font-medium">Alex Johnson</span>
-            </div>
+            {teamMembers.map((member, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <Avatar className="w-16 h-16 mb-2">
+                  <AvatarImage
+                    className="w-full h-full"
+                    src={`https://github.com/shadcn.png`} // Replace with actual URL for each team member if available
+                    alt={member}
+                  />
+                  <AvatarFallback>{member.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <span className="text-sm font-medium">{member}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

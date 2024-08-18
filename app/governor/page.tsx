@@ -4,6 +4,8 @@ import VotedProposals from "@/components/governor/voted-proposal-card";
 import GovernorPageSlider from "@/components/slider/governor-page-slider";
 import React from "react";
 
+export const govenorWalletAddress = '0x0EE18036726a59626f89571BB4507842040b4832';
+
 const GovernorsMainPage = () => {
   return (
     <div className="pm flex flex-col mt-10">
@@ -24,7 +26,6 @@ const GovernorsMainPage = () => {
         <h1 className="font-extrabold text-4xl ">Recent Proposals</h1>
       </div>
       <div className="mt-5">
-        <GovernorPageSlider showDetails={false} />
         <GovernorPageSlider showDetails={false} />
       </div>
       {/* <div className="flex flex-col justify-start items-start mb-10"> */}
