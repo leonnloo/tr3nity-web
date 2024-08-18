@@ -1,11 +1,16 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import axios from 'axios'; // Import axios for making HTTP requests
+import { govenorWalletAddress } from "@/app/governor/page";
 
 const ReputationScore = () => {
-  const progress = 60; // This is the progress percentage
+  const [progress, setProgress] = useState<number | null>(null); // State to store progress
+  const [loading, setLoading] = useState<boolean>(true); // State for loading status
+  const [error, setError] = useState<string | null>(null); // State for error handling
+
   const radius = 45;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (progress / 100) * circumference;
 
   // Function to determine color based on progress
   const getColor = (progress: number) => {
@@ -18,6 +23,52 @@ const ReputationScore = () => {
     }
   };
 
+  // Fetch the progress from the API
+  const fetchProgress = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}tr3nity_project/reputation_score/${govenorWalletAddress}`);
+      if (response.data.status === 'success') {
+        setProgress(response.data.data); // Update progress with the response data
+      } else {
+        setError('Failed to load progress');
+      }
+    } catch (error) {
+      console.error('Error fetching progress:', error);
+      setError('Failed to load progress');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProgress();
+  }, []);
+
+  if (loading) {
+    return (
+      <Card className="shadow-lg rounded-xl flex items-center justify-center h-full">
+        <CardContent className="flex flex-col items-center justify-center py-2">
+          <p className="text-lg text-gray-600">Loading...</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card className="shadow-lg rounded-xl flex items-center justify-center h-full">
+        <CardContent className="flex flex-col items-center justify-center py-2">
+          <p className="text-lg text-red-600">{error}</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (progress === null) {
+    return null; // or a placeholder if you prefer
+  }
+
+  const offset = circumference - (progress / 100) * circumference;
   const strokeColor = getColor(progress);
 
   return (

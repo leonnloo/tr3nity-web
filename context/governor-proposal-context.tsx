@@ -1,10 +1,10 @@
 "use client";
-import { sampleDataType } from "@/lib/example";
+import { Project } from "@/lib/example";
 import React, { createContext, useContext, useState } from "react";
 
 interface GProposalContextType {
-  governorProposal: sampleDataType | null;
-  setGovernorProposal: (governorProposal: sampleDataType | null) => void;
+  governorProposal: Project | null;
+  setGovernorProposal: (governorProposal: Project | null) => void;
 }
 
 const GovernorContext = createContext<GProposalContextType | undefined>(
@@ -15,7 +15,7 @@ export const GovernorProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [governorProposal, setGovernorProposal] =
-    useState<sampleDataType | null>(null);
+    useState<Project | null>(null);
 
   return (
     <GovernorContext.Provider value={{ governorProposal, setGovernorProposal }}>

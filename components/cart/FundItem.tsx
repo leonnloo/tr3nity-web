@@ -41,7 +41,7 @@ const FundItem: React.FC<FundItemProps> = ({
               <div className="mt-4">
                 <input
                   type="number"
-                  value={amount}
+                  value='5'
                   onChange={handleAmountChange}
                   className="border rounded px-2 py-1"
                   placeholder="TR3 Coin"

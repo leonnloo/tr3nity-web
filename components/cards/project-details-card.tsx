@@ -20,7 +20,7 @@ const ProjectDetailsCard: React.FC<ProjectDetailsCardProps> = ({
   contributors,
   endDays,
 }) => {
-  const { addItemToCart } = useCart(); // Use CartContext
+  const {cart ,addItemToCart } = useCart(); // Use CartContext
   const router = useRouter();
 
   const handleAddToCart = () => {
@@ -29,7 +29,6 @@ const ProjectDetailsCard: React.FC<ProjectDetailsCardProps> = ({
     toast({
       title: "Added to Cart",
       description: `${project.project_name} has been added to your cart`,
-      
     });
   };
 

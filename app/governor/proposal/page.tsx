@@ -9,7 +9,7 @@ import DaysLeft from "@/components/days-left";
 import LinksComponent from "@/components/links-card";
 import MembersComponent from "@/components/members-card";
 
-const ResearcherProjectDetailsPage = () => {
+const GovernorResearcherProjectDetailsPage = () => {
   const { governorProposal } = useGovernorProposal();
   const router = useRouter();
 
@@ -63,7 +63,7 @@ const ResearcherProjectDetailsPage = () => {
         </div>
         {/* SIDEBAR */}
         <div className="w-[35rem] mb-10 space-y-8">
-          <VotesCard />
+          <VotesCard projectId={governorProposal.id} />
 
           <LinksComponent links={governorProposal.links} />
           <MembersComponent members={governorProposal.members} />
@@ -73,4 +73,4 @@ const ResearcherProjectDetailsPage = () => {
   );
 };
 
-export default ResearcherProjectDetailsPage;
+export default GovernorResearcherProjectDetailsPage;

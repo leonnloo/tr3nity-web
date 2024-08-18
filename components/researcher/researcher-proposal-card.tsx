@@ -4,9 +4,9 @@ import Image from "next/image";
 import StatusBadge from "./proposal-status";
 import { useRouter } from "next/navigation";
 import { useResearcherSampleData } from "@/context/researcher-proposal-context";
-import { sampleDataType } from "@/lib/example";
+import { Project } from "@/lib/example";
 
-const ResearcherProposalCard = ({ data }: { data: sampleDataType }) => {
+const ResearcherProposalCard = ({ data }: { data: Project }) => {
   const router = useRouter();
   const { setResearcherSampleData } = useResearcherSampleData();
   return (
@@ -21,7 +21,7 @@ const ResearcherProposalCard = ({ data }: { data: sampleDataType }) => {
         <div className="flex-1 flex flex-col items-start mt-5">
           <div className="flex items-center space-x-2 mb-4">
             <StatusBadge status={data.status} />
-            <span className="text-sm text-gray-500">{data.duration}</span>
+            <span className="text-sm text-gray-500">{data.status === 'executed'? 'The project has ended' : data.duration}</span>
           </div>
           <h2 className="text-2xl font-bold text-gray-900 w-2/3 max-w-lg">
             {data.title}

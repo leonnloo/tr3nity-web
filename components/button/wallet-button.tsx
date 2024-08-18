@@ -3,33 +3,51 @@ import React, { useState } from "react";
 import { FaLock, FaRegUser } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { HiIdentification } from "react-icons/hi2";
+
 const WalletOverlay = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false); // Toggle between Sign In and Create Wallet
-  const [walletId, setWalletId] = useState("0000-00-0000");
-  const [password, setPassword] = useState("123");
+  const [walletId, setWalletId] = useState("001102020294");
+  const [password, setPassword] = useState("123456789");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [ic, setIC] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
+  const [connectedAddress, setConnectedAddress] = useState(""); // To store the simulated wallet address
+
   const toggleOverlay = () => {
     setIsOpen(!isOpen);
-  };
+  };  
 
   const toggleForm = () => {
     setIsCreating(!isCreating);
   };
+  const generateRandomAddress = () => {
+    const characters = "0123456789abcdef";
+    let address = "0x";
+    for (let i = 0; i < 40; i++) {
+      address += characters[Math.floor(Math.random() * 16)];
+    }
+    return address;
+  };
+
+  const formatAddress = (address: string) => {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
 
   const handleSignIn = () => {
-    alert(`ID: ${walletId}, Password: ${password}`);
+    const simulatedAddress = generateRandomAddress();
+    setConnectedAddress(simulatedAddress);
     setIsOpen(false);
   };
-
+  
   const handleCreateWallet = () => {
-    alert(`Username: ${username}, Email: ${email}, Password: ${newPassword}`);
+    const simulatedAddress = generateRandomAddress();
+    setConnectedAddress(simulatedAddress);
     setIsOpen(false);
   };
+  
 
   return (
     <div className="relative">
@@ -38,7 +56,7 @@ const WalletOverlay = () => {
         onClick={toggleOverlay}
         className="bg-secondaryYellow text-black px-4 py-2 rounded-md hover:bg-yellow-300"
       >
-        Connect wallet
+        {connectedAddress ? formatAddress(connectedAddress) : "Connect Wallet"}
       </button>
 
       {/* Overlay */}
@@ -100,10 +118,7 @@ const WalletOverlay = () => {
               </button>
               <p className="text-sm text-gray-600 mt-4 text-center">
                 Don’t have a wallet?{" "}
-                <button
-                  onClick={toggleForm}
-                  className="text-mainBlue"
-                >
+                <button onClick={toggleForm} className="text-mainBlue">
                   Create one
                 </button>
               </p>
@@ -118,7 +133,7 @@ const WalletOverlay = () => {
                   htmlFor="username"
                 >
                   <div className="flex items-center">
-                    <FaRegUser className="mr-3"/>
+                    <FaRegUser className="mr-3" />
                     Name
                   </div>
                 </label>
@@ -137,7 +152,7 @@ const WalletOverlay = () => {
                   htmlFor="email"
                 >
                   <div className="flex items-center">
-                    <IoMail className="mr-3"/>
+                    <IoMail className="mr-3" />
                     Email
                   </div>
                 </label>
@@ -156,7 +171,7 @@ const WalletOverlay = () => {
                   htmlFor="ic"
                 >
                   <div className="flex items-center">
-                    <HiIdentification className="mr-3"/>
+                    <HiIdentification className="mr-3" />
                     IC
                   </div>
                 </label>
@@ -175,7 +190,7 @@ const WalletOverlay = () => {
                   htmlFor="new-password"
                 >
                   <div className="flex items-center">
-                    <FaLock className="mr-3"/>
+                    <FaLock className="mr-3" />
                     New Password
                   </div>
                 </label>
@@ -196,10 +211,7 @@ const WalletOverlay = () => {
               </button>
               <p className="text-sm text-gray-600 mt-4 text-center">
                 Already have a wallet?{" "}
-                <button
-                  onClick={toggleForm}
-                  className="text-mainBlue"
-                >
+                <button onClick={toggleForm} className="text-mainBlue">
                   Sign In
                 </button>
               </p>
